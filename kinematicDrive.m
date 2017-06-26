@@ -5,7 +5,7 @@ clc
 RFun = @(theta) [cos(theta) -sin(theta); 
                  sin(theta) cos(theta)];
              
-tau = 49/64*pi;
+tau = 0;
 alphaMatFun =  @(t) [-pi/2;pi/2] + RFun(-pi/4) * [5/4*cos(t+tau); 17/20*sin(t+tau)];
 
 vectorFieldFun = @(alpha1, alpha2) [1+cos(alpha2) 1+cos(alpha1);
@@ -21,7 +21,7 @@ epsilonFun = @(vectorField, D, alphaDotMat) -1/D * vectorField * alphaDotMat;
 % Simulation parameters
 
 currentPose = [0;
-               0;
+               2.5;
                0];
 robot = ExampleHelperRobotSimulator('emptyMap');
 robotRadius = 0.5;
@@ -33,14 +33,14 @@ controlRate = robotics.Rate(50); % Affects timing of loop iterations and
                                   % resolution of pose measurements? 
                                   % Not entirely sure on what this does
                                   % specifically. 
-xlim([-1 10]);
-ylim([-5 5]);
+xlim([-1 20]);
+ylim([ 0 5]);
 
 %--------------------------------------------------------------------------
 % Simulation
 
 t = 0;
-dt = pi/16;
+dt = pi/160;
 
 while true
     alphaMat = alphaMatFun(t);
